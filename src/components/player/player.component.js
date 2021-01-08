@@ -34,8 +34,8 @@ const Player = ({
 		if (songRef.current.duration) {
 			const current = songRef.current.currentTime;
 			const duration = songRef.current.duration;
-
 			setSongInfo({ currentTime: current, duration });
+			playSongHandler();
 		}
 	};
 
