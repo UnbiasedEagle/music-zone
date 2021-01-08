@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import data from './data/songs.data';
+import Player from './components/player/player.component';
+import Song from './components/song/song.component';
+import Library from './components/library/library.component';
+import Navbar from './components/nav/nav.component';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [ songs, setSongs ] = useState(data());
+	const [ currentSong, setCurrentSong ] = useState(songs[0]);
+	const [ isSongPlaying, setIsSongPlaying ] = useState(false);
+	const [ showLibrary, setShowLibrary ] = useState(false);
+	const [ currentSongIndex, setCurrentSongIndex ] = useState(0);
+
+	useEffect(
+		() => {
+			const updatedSongsList = songs.map((song) => {
+				if (song.id === currentSong.id) {
+					song.active = true;
+				} else {
+					song.active = false;
+				}
+				return song;
+			});
+
+			setSongs(updatedSongsList);
+
+			setIsSongPlaying(false);
+		},
+		// eslint-disable-next-line
+		[ currentSong ]
+	);
+
+	useEffect(
+		() => {
+			setCurrentSong(songs[currentSongIndex]);
+		},
+		// eslint-disable-next-line
+		[ currentSongIndex, setCurrentSong ]
+	);
+
+	return (
+		<div className={`app ${showLibrary ? 'active-library' : ''}`}>
+			<Navbar setShowLibrary={setShowLibrary} showLibrary={showLibrary} />
+			<Song currentSong={currentSong} />
+			<Player
+				setCurrentSongIndex={setCurrentSongIndex}
+				currentSongIndex={currentSongIndex}
+				setCurrentSong={setCurrentSong}
+				isSongPlaying={isSongPlaying}
+				setIsSongPlaying={setIsSongPlaying}
+				currentSong={currentSong}
+				totalSongs={songs.length}
+			/>
+			<Library showLibrary={showLibrary} setCurrentSong={setCurrentSong} songs={songs} />
+		</div>
+	);
 }
 
 export default App;

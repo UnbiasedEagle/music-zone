@@ -1,0 +1,37 @@
+.library-song{
+   display: flex;
+   align-items: center;
+   padding: 1rem;
+   cursor: pointer;
+   opacity: 0;
+   transition: all 0.5s ease;
+   transition-property:transform, opacity ;
+    transform: translateX(-100%);
+   img{
+       width: 30%;
+   }
+
+   .song-description{
+        padding-left: 1rem;     
+        h3{
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        h4{
+            font-size: 0.8rem;
+        }
+   }
+
+   &:hover{
+       background-color: #c9cbff2a
+   }
+}
+
+.selected{
+    background-color: #c9cbffa4
+}
+
+.active{
+    opacity: 1;
+    transform: translateX(0%);
+}
