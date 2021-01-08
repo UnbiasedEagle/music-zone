@@ -79,7 +79,7 @@ const Player = ({
 			}
 		},
 		// eslint-disable-next-line
-		[ currentSong, playSongHandler ]
+		[ currentSong ]
 	);
 
 	return (
@@ -87,6 +87,7 @@ const Player = ({
 			<div className='time-controls'>
 				<p>{getTime(songInfo.currentTime)}</p>
 				<input
+					className='rs-range'
 					min={0}
 					onChange={dragHandler}
 					max={songInfo.duration}

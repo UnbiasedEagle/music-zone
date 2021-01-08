@@ -46,7 +46,7 @@ function App() {
 	return (
 		<div className={`app ${showLibrary ? 'active-library' : ''}`}>
 			<Navbar setShowLibrary={setShowLibrary} showLibrary={showLibrary} />
-			<Song currentSong={currentSong} />
+			<Song isSongPlayling={isSongPlaying} currentSong={currentSong} />
 			<Player
 				setCurrentSongIndex={setCurrentSongIndex}
 				currentSongIndex={currentSongIndex}
