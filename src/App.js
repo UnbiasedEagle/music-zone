@@ -25,11 +25,15 @@ function App() {
 
 			setSongs(updatedSongsList);
 
-			setIsSongPlaying(false);
+			setIsSongPlaying(true);
 		},
 		// eslint-disable-next-line
 		[ currentSong ]
 	);
+
+	useEffect(() => {
+		setIsSongPlaying(false);
+	}, []);
 
 	useEffect(
 		() => {

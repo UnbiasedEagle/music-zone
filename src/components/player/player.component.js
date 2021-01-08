@@ -7,7 +7,6 @@ const Player = ({
 	setIsSongPlaying,
 	setCurrentSongIndex,
 	currentSongIndex,
-	setCurrentSong,
 	totalSongs
 }) => {
 	const songRef = useRef(null);
@@ -35,7 +34,6 @@ const Player = ({
 			const current = songRef.current.currentTime;
 			const duration = songRef.current.duration;
 			setSongInfo({ currentTime: current, duration });
-			playSongHandler();
 		}
 	};
 
@@ -73,6 +71,16 @@ const Player = ({
 			setCurrentSongIndex(currentSongIndex + 1);
 		}
 	};
+
+	useEffect(
+		() => {
+			if (currentSong && isSongPlaying) {
+				playSongHandler();
+			}
+		},
+		// eslint-disable-next-line
+		[ currentSong, playSongHandler ]
+	);
 
 	return (
 		<div className='player'>
